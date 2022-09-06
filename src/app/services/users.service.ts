@@ -11,8 +11,9 @@ export class UsersService {
 
   constructor(private readonly http: HttpClient) { }
     
-  getUserById(id: number): Observable<any> {
-    console.log('getUserById', {id})
-    return this.http.get(`${this.usersApiPath}/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get(`${this.usersApiPath}/${id}`).pipe(
+      map((user) => user as User)
+    );
   }
 }
