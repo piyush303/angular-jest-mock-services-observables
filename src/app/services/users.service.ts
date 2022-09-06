@@ -10,14 +10,10 @@ export class UsersService {
   readonly usersApiPath = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(private readonly http: HttpClient) { }
-  
-  getUsers(): Observable<User[]> {
-    return this.http.get(this.usersApiPath).pipe(
-      map((users) => users as User[])
+    
+  getUserById(id: number): Observable<User> {
+    return this.http.get(`${this.usersApiPath}/${id}`).pipe(
+      map((user) => user as User)
     );
-  }
-  
-  getUserById(id: number): Observable<any> {
-    return this.http.get(`${this.usersApiPath}/${id}`);
   }
 }
