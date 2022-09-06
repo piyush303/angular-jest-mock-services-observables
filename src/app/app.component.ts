@@ -35,6 +35,7 @@ export class AppComponent {
         }),
         takeUntil(this.destroyed$)
       )
+      .subscribe()
   }
   
   ngOnDestroy() {
