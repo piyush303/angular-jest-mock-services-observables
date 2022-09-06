@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,10 @@ export class UsersService {
 
   constructor(private readonly http: HttpClient) { }
   
-  getUsers(): Observable<any> {
-    return this.http.get(this.usersApiPath);
+  getUsers(): Observable<User[]> {
+    return this.http.get(this.usersApiPath).pipe(
+      map((users) => users as User[])
+    );
   }
   
   getUserById(id: number): Observable<any> {
