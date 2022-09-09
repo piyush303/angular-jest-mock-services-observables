@@ -9,7 +9,6 @@ import { User } from './services/user.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-jest-mock-services-observables';
   private destroyed$ = new ReplaySubject<void>(1);
   isApiFailed = false;
   userData: User | undefined;
