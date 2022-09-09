@@ -6,7 +6,7 @@
   <p>Email: <span data-testid="user-email">{{ userData.email }}</span></p>
 </div>
 
-<button (click)="getUserById(0)">Show user details</button>
+<button (click)="getUserById(1)">Show user details</button>
 
 <div *ngIf="isApiFailed">
   <p data-testid="failed-info">Failed to fetch user. Please try again.</p>
