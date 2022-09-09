@@ -1,13 +1,16 @@
-<h1>User</h1>
-<div *ngIf="userData && !isApiFailed">
-  <p>Id: <span data-testid="user-id">{{ userData.id }}</span></p>
-  <p>Name: <span data-testid="user-name">{{ userData.name }}</span></p>
-  <p>User Name: <span data-testid="user-username">{{ userData.username }}</span></p>
-  <p>Email: <span data-testid="user-email">{{ userData.email }}</span></p>
-</div>
+<section class="wrapper">
+  <h1>User</h1>
+  
+  <div *ngIf="userData && !isApiFailed">
+    <p>Id: <span data-testid="user-id">{{ userData.id }}</span></p>
+    <p>Name: <span data-testid="user-name">{{ userData.name }}</span></p>
+    <p>User Name: <span data-testid="user-username">{{ userData.username }}</span></p>
+    <p>Email: <span data-testid="user-email">{{ userData.email }}</span></p>
+  </div>
 
-<button (click)="getUserById(1)">Show user details</button>
-
-<div *ngIf="isApiFailed">
-  <p data-testid="failed-info">Failed to fetch user. Please try again.</p>
-</div>
+  <div *ngIf="isApiFailed">
+    <h3 data-testid="failed-info">Failed to fetch user. Please try again.</h3>
+  </div>
+  
+  <button (click)="getUserById(1)">Show user details</button>
+</section>
