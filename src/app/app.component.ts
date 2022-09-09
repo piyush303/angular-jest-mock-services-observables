@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { catchError, of, takeUntil, ReplaySubject, map } from 'rxjs';
 import { UsersService } from './services/users.service';
 import { User } from './services/user.model';
@@ -8,14 +8,12 @@ import { User } from './services/user.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   private destroyed$ = new ReplaySubject<void>(1);
   isApiFailed = false;
   userData: User | undefined;
   
   constructor(private readonly usersService: UsersService) {}
-  
-  ngOnInit() {}
   
   getUserById(id: number) {
     this.isApiFailed = false;

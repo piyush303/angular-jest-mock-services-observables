@@ -1,9 +1,9 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { createSpyFromClass, Spy } from 'jest-auto-spies';
 import { render, screen } from '@testing-library/angular';
+import userEvent from '@testing-library/user-event';
 import { AppComponent } from './app.component';
 import { UsersService } from './services/users.service';
 import { User } from './services/user.model';
@@ -48,7 +48,6 @@ describe('AppComponent', () => {
       }
     ],
     componentProperties: {
-      userData: user,
       isApiFailed
     }
   }
@@ -59,7 +58,10 @@ describe('AppComponent', () => {
   });
 
   it('should Success API call and render user info', () => {
-    usersService.getUserById.mockReturnValue(of(user))
+    usersService.getUserById.mockReturnValue(of(user));
+    
+    const showUserButton = screen.getByTestId('show-user-details-button');
+    userEvent.click(showUserButton);
     
     const userId = screen.getByTestId('user-id');
     const userName = screen.getByTestId('user-name');
@@ -73,8 +75,12 @@ describe('AppComponent', () => {
   });
   
   it('should Fail API call and render fail info', () => {
-    component.isApiFailed = true;
     usersService.getUserById.mockReturnValue(of({}))
+    
+    const showUserButton = screen.getByTestId('show-user-details-button');
+    userEvent.click(showUserButton);
+    
+    component.isApiFailed = true;
     
     const failedInfo = screen.getByTestId('failed-info');
     
